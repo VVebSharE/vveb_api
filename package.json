@@ -1,0 +1,31 @@
+{
+  "name": "community_website",
+  "version": "1.0.0",
+  "description": "a community website to create and collab on projects",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UIT-NORMIES/Community-Website.git"
+  },
+  "author": "uit_normies",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UIT-NORMIES/Community-Website/issues"
+  },
+  "homepage": "https://github.com/UIT-NORMIES/Community-Website#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "mongose": "^0.0.2-security",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
