@@ -17,6 +17,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/projects", require("./routes/projectRoutes"));
+app.use("/api/users", require("./routes/userRoutes"));
 
 app.use(errorHandler);
 
