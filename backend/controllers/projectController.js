@@ -40,16 +40,15 @@ const updateProjects = asyncHandler(async (req, res) => {
     throw new Error("Project not found");
   }
 
-  const user = await User.findById(req.user.id)
 
   // Check for user
-  if(!user){
+  if(!req.user){
     res.status(401)
     throw new Error('User not found')
   }
 
   // Make sure the logged in user matches the goal user
-  if(project.user.toString()!=user.id){
+  if(project.user.toString()!=req.user.id){
     res.status(401)
     throw new Error('User not authorized')
   }
@@ -73,16 +72,14 @@ const deleteProjects = asyncHandler(async (req, res) => {
     throw new Error("Project not found");
   }
 
-  const user = await User.findById(req.user.id)
-
   // Check for user
-  if(!user){
+  if(!req.user){
     res.status(401)
     throw new Error('User not found')
   }
 
   // Make sure the logged in user matches the goal user
-  if(project.user.toString()!=user.id){
+  if(project.user.toString()!=req.user.id){
     res.status(401)
     throw new Error('User not authorized')
   }
