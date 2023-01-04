@@ -85,7 +85,7 @@ const deleteProjects = asyncHandler(async (req, res) => {
   }
 
   await project.remove();
-  res.json({ message: `Delete project ${req.params.id}` });
+  res.json({ id: `${req.params.id}` });
 });
 
 module.exports = {

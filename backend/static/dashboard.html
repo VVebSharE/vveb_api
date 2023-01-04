@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div class="container-sm d-none" id="main_con">
+        <div id="greeting_con">
+
+        </div>
+        <div class=" py-4 px-5 border container">
+            <h2 class="m-2">Add, edit and delete your projects</h2>
+            <div class=" d-flex flex-wrap" id="projects_con">
+
+                <button class="card m-2 bg-light btn btn-dark" data-bs-toggle="modal"
+                    data-bs-target="#add_project_modal" style="width: 17rem;">
+                    <div class="card-body m-auto text-bg-light">
+                        <h5 class="card-title">Add Project</h5>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="currentColor"
+                            class="bi bi-plus-lg" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+                        </svg>
+                    </div>
+                </button>
+
+                <!-- Modal  for add project-->
+                <div class="modal fade" id="add_project_modal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="add_project_modal_Label">Add Project</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" id="add_project_modal_close_btn"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="mb-3">
+                                        <label for="for_add_project_name" class="col-form-label">Project Name:</label>
+                                        <input type="text" class="form-control" id="for_add_project_name">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" onclick="add_project()">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- modal for edit project-->
+                <div class="modal fade" id="edit_project_modal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="edit_project_modal_Label">Edit Project</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" id="edit_project_modal_close_btn"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="mb-3">
+                                        <label for="for_edit_project_name" class="col-form-label">Project Name:</label>
+                                        <input type="text" class="form-control" id="for_edit_project_name">
+                                    </div>
+                                    <div class="mb-3 d-none">
+                                        <label for="for_edit_project_id" class="col-form-label">Project Id:</label>
+                                        <input type="text" class="form-control" id="for_edit_project_id">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" onclick="update_project()">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- modal for delete project -->
+                <div class="modal fade" id="delete_project_modal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="delete_project_modal_Label">Delete Project</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" id="delete_project_modal_close_btn"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="link-danger">Are you sure to delete this project?</p>
+                                <form>
+                                    <div class="mb-3 d-none">
+                                        <label for="for_delete_project_id" class="col-form-label">Project Id:</label>
+                                        <input type="text" class="form-control" id="for_delete_project_id">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" onclick="delete_project()">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="card m-2" style="width: 15rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the
+                            card's content.</p>
+                        <a href="#" class="card-link link-primary" data-bs-toggle="modal" data-bs-target="#edit_project_modal" data-bs-whatever="name1">Edit Project</a>
+                        <a href="#" class="card-link link-danger"  data-bs-toggle="modal" data-bs-target="#delete_project_modal" data-bs-whatever="name1">Delete Project</a>
+                    </div>
+                </div>
+                <div class="card m-2" style="width: 15rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the
+                            card's content.</p>
+                        <a href="#" class="card-link link-primary" data-bs-toggle="modal" data-bs-target="#edit_project_modal" data-bs-whatever="name2">Edit Project</a>
+                        <a href="#" class="card-link link-danger"  data-bs-toggle="modal" data-bs-target="#delete_project_modal" data-bs-whatever="name2">Delete Project</a>
+                    </div>
+                </div> -->
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Loading Spinner -->
+    <div>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#loading_spinner_modal" id="loading_spinner_modal_open">
+            Launch static backdrop modal
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="loading_spinner_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog m-auto modal-dialog-centered justify-content-center">
+                <div class=" modal-content" style="width: 6rem; height: 6rem;">
+    
+                    <div class="spinner-border text-info  m-auto" style="width: 5rem; height: 5rem;" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <button type="button" class="btn btn-secondary d-none" data-bs-dismiss="modal" id="loading_spinner_modal_close">Close</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+   
+
+    <!-- Notification -->
+    <div>
+
+
+        <div class="position-fixed top-0 end-0 p-3" style="z-index: 1056" id="notification_con">
+            <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+                    <path
+                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                </symbol>
+                <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                    <path
+                        d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+                </symbol>
+                <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+                    <path
+                        d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                </symbol>
+            </svg>
+
+            <!-- <div class="alert alert-primary d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+                    <use xlink:href="#info-fill" />
+                </svg>
+                <div>
+                    An example alert with an icon 
+                </div>
+                <button type="button" class="btn-close ms-3" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div> -->
+        </div>
+    </div>
+    <script src="./scripts/dashboard.js"></script>
+</body>
+
+</html>
